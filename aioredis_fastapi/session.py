@@ -1,9 +1,13 @@
 import aioredis
-import pickle
-from config import settings
-from typing import Any
-import attr
 import asyncio
+import attr
+from config import (
+    settings,
+)
+import pickle
+from typing import (
+    Any,
+)
 
 
 class Redis:

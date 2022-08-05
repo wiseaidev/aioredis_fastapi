@@ -1,9 +1,18 @@
-from typing import Any, Generator
-
-from fastapi import Depends, Request, Response
-
-from config import settings
-from session import SessionStorage
+from config import (
+    settings,
+)
+from fastapi import (
+    Depends,
+    Request,
+    Response,
+)
+from session import (
+    SessionStorage,
+)
+from typing import (
+    Any,
+    Generator,
+)
 
 
 def get_session_storage() -> Generator:
