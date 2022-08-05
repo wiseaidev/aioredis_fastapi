@@ -1,5 +1,6 @@
 """
-aioredis_fastapi is an asynchronous `redis based session`_ backend for FastAPI powered applications.
+aioredis_fastapi is an asynchronous redis based session backend for FastAPI powered applications.
+
 Copyright (C) 2022  Mahmoud Harmouch
 
 This program is free software: you can redistribute it and/or modify
