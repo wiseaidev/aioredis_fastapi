@@ -29,6 +29,8 @@ include = [
 
 [tool.poetry.dependencies]
 python = "^3.9"
+fastapi = "^0.70.1"
+aioredis = "^2.0.1"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
