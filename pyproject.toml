@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "aioredis_fastapi"
-version = "3.0.0"
+version = "4.0.0"
 description = "aioredis_fastapi is an asynchronous redis based session backend for FastAPI powered applications."
 authors = [
     "Mahmoud Harmouch <business@wiseai.dev>"
