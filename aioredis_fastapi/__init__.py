@@ -5,7 +5,7 @@ aioredis_fastapi is an asynchronous redis based session backend for FastAPI powe
 
 __author__ = """Mahmoud Harmouch"""
 __email__ = "business@wiseai.dev"
-__version__ = "0.0.1"
+__version__ = "2.0.0"
 
 from aioredis_fastapi.config import (
     settings,

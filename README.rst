@@ -11,9 +11,10 @@ aioredis_fastapi
    :alt: Banner
 
 
+
 **aioredis_fastapi** is an asynchronous `redis based session`_ backend for FastAPI powered applications.
 
-🚸This repository is under active development, and it is not production-ready.🚸
+🚸This repository is currently under testing, kind of production-ready.🚸
 
 
 🛠️ Requirements
@@ -30,7 +31,7 @@ With :code:`pip`:
 
 .. code-block:: console
 
-   python3.9 -m pip install aioredis_fastapi
+   python3.9 -m pip install aioredis-fastapi
 
 or by checking out the repo and installing it with `poetry`_:
 
@@ -82,20 +83,47 @@ or by checking out the repo and installing it with `poetry`_:
        return None
 
 
-🚸 Custom Config
+🛠️ Custom Config
 ----------------
 
 .. code-block:: python3
 
-   from aioredis_fastapi.config import settings
+   from aioredis_fastapi import settings
    from datetime import timedelta
+   import random
 
    settings(
       redis_url="redis://localhost:6379",
       session_id_name="session-id",
       session_id_generator=lambda: str(random.randint(1000, 9999)),
-      expire_time: timedelta(days=1)
+      expire_time= timedelta(days=1)
    )
+
+
+🌐 Interacting with the endpoints
+---------------------------------
+
+.. code-block:: python3
+
+   from httpx import AsyncClient
+   import asyncio
+   from config import settings
+
+   async def main():
+       client = AsyncClient()
+       r = await client.post("http://127.0.0.1:8000/set-session", json=dict(a=1, b="data", c=True))
+       r = await client.get("http://127.0.0.1:8000/get-session", cookies={settings().session_id_name: "ssid"})
+       print(r.text)
+       return r.text
+
+   loop = asyncio.new_event_loop()
+   asyncio.set_event_loop(loop)
+   try:
+       loop.run_until_complete(main())
+   finally:
+       loop.close()
+       asyncio.set_event_loop(None)
+
 
 🎉 Credits
 ----------

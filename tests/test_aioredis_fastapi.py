@@ -11,4 +11,4 @@ from aioredis_fastapi import (
 
 
 def test_version():
-    assert __version__ == "0.0.1"
+    assert __version__ == "2.0.0"
