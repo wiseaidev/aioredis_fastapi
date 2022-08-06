@@ -5,7 +5,7 @@ aioredis_fastapi is an asynchronous redis based session backend for FastAPI powe
 
 import pytest
 
-from frozndict import (
+from aioredis_fastapi import (
     __version__,
 )
 
