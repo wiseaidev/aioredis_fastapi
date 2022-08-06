@@ -42,7 +42,7 @@ With :code:`pip`:
 
    from fastapi import Depends, FastAPI, Request, Response
 
-   from aioredis_fastapi.methods import get_session_storage, get_session, get_session_id, set_session, del_session, SessionStorage
+   from methods import get_session_storage, get_session, get_session_id, set_session, del_session, SessionStorage
 
 
    app = FastAPI(title=__name__)
@@ -58,7 +58,7 @@ With :code:`pip`:
 
    @app.get("/get-session")
    async def _get_session(session: Any = Depends(get_session)):
-       return await session
+       return session
 
 
    @app.post("/del-session")
@@ -68,6 +68,20 @@ With :code:`pip`:
        await del_session(session_id, session_storage)
        return None
 
+🚸 Custom Config
+----------------
+
+.. code-block:: python3
+
+   from aioredis_fastapi.config import settings
+   from datetime import timedelta
+
+   settings(
+      redis_url="redis://localhost:6379",
+      session_id_name="session-id",
+      session_id_generator=lambda: str(random.randint(1000, 9999)),
+      expire_time: timedelta(days=1)
+   )
 
 🎉 Credits
 ----------
