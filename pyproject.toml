@@ -29,21 +29,12 @@ include = [
 
 [tool.poetry.dependencies]
 python = "^3.9"
-fastapi = "^0.70.1"
+fastapi = "^0.79.0"
 aioredis = "^2.0.1"
+uvicorn = "^0.18.2"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
-flake8 = "^4.0.1"
-coverage = "^6.3.2"
-rstcheck = "^3.3.1"
-mypy = "^0.941"
-pytest-cov = "^3.0.0"
-tox = "^3.24.5"
-isort = "^5.10.1"
-black = "^22.1.0"
-pre-commit = "^2.17.0"
-bump2version = "^1.0.1"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
