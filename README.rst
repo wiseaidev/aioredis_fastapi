@@ -32,6 +32,12 @@ With :code:`pip`:
 
    python3.9 -m pip install aioredis_fastapi
 
+or by checking out the repo and installing it with `poetry`_:
+
+.. code-block:: console
+
+   git clone https://github.com/wiseaidev/aioredis_fastapi.git && cd aioredis_fastapi && poetry install
+
 
 🚸 Usage
 --------
@@ -39,18 +45,24 @@ With :code:`pip`:
 .. code-block:: python3
 
    from typing import Any
-
    from fastapi import Depends, FastAPI, Request, Response
-
-   from aioredis_fastapi.methods import get_session_storage, get_session, get_session_id, set_session, del_session, SessionStorage
-
+   from aioredis_fastapi import (
+       get_session_storage,
+       get_session,
+       get_session_id,
+       set_session,
+       del_session,
+       SessionStorage,
+   )
 
    app = FastAPI(title=__name__)
 
 
    @app.post("/set-session")
    async def _set_session(
-       request: Request, response: Response, session_storage: SessionStorage = Depends(get_session_storage)
+       request: Request,
+       response: Response,
+       session_storage: SessionStorage = Depends(get_session_storage),
    ):
        session_data = await request.json()
        await set_session(response, session_data, session_storage)
@@ -58,16 +70,32 @@ With :code:`pip`:
 
    @app.get("/get-session")
    async def _get_session(session: Any = Depends(get_session)):
-       return await session
+       return session
 
 
    @app.post("/del-session")
    async def _delete_session(
-       session_id: str = Depends(get_session_id), session_storage: SessionStorage = Depends(get_session_storage)
+       session_id: str = Depends(get_session_id),
+       session_storage: SessionStorage = Depends(get_session_storage),
    ):
        await del_session(session_id, session_storage)
        return None
 
+
+🚸 Custom Config
+----------------
+
+.. code-block:: python3
+
+   from aioredis_fastapi.config import settings
+   from datetime import timedelta
+
+   settings(
+      redis_url="redis://localhost:6379",
+      session_id_name="session-id",
+      session_id_generator=lambda: str(random.randint(1000, 9999)),
+      expire_time: timedelta(days=1)
+   )
 
 🎉 Credits
 ----------
