@@ -21,8 +21,10 @@ aliases:
     run:
       name: Setup, install Poetry & dependencies
       command: |
-        curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | POETRY_UNINSTALL=1 python -
-        curl -sSL https://install.python-poetry.org | python3 -
+        curl -sSL https://install.python-poetry.org | python3 - --uninstall
+        rm -rf /home/${USER}/.poetry
+        rm -rf /home/${USER}/.pyenv/shims/poetry
+        curl -sSL https://install.python-poetry.org | python3 - --version 1.2.2
         poetry env use 3.9.10
         poetry install
   - &build_upload_to_pipy
