@@ -2,6 +2,9 @@
 aioredis_fastapi
 ================
 
+.. image:: https://dl.circleci.com/status-badge/img/gh/wiseaidev/aioredis_fastapi/tree/main.svg?style=svg
+        :target: https://dl.circleci.com/status-badge/redirect/gh/wiseaidev/aioredis_fastapi/tree/main
+
 .. image:: https://img.shields.io/badge/License-GPLv3-blue.svg
    :target: https://github.com/wiseaidev/aioredis_fastapi/blob/main/LICENSE
    :alt: License
@@ -107,7 +110,7 @@ or by checking out the repo and installing it with `poetry`_:
 
    from httpx import AsyncClient
    import asyncio
-   from config import settings
+   from aioredis_fastapi.config import settings
 
    async def main():
        client = AsyncClient()

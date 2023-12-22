@@ -2,10 +2,9 @@
 aioredis_fastapi is an asynchronous redis based session backend for FastAPI powered applications.
 """
 
-import attr
 from attrs import (
+    define,
     field,
-    frozen,
     validators,
 )
 from datetime import (
@@ -23,8 +22,7 @@ from uuid import (
 )
 
 
-@frozen
-@attr.s(auto_attribs=True, slots=True, init=False, repr=False)
+@define(auto_attribs=True, slots=True, init=True, repr=False, frozen=True)
 class Settings:
     _redis_url: str = field(
         default="redis://localhost:6379",
@@ -34,9 +32,7 @@ class Settings:
     _session_id_name: str = field(
         default="ssid", validator=validators.instance_of(str), converter=str
     )
-    _session_id_generator: Callable[[], str] = field(
-        default=None, validator=validators.instance_of(Callable), converter=Callable
-    )
+    _session_id_generator: Callable[[], str] = field(default=None)
     _expire_time: timedelta = field(
         default=timedelta(hours=6), validator=validators.instance_of(timedelta)
     )
@@ -91,7 +87,7 @@ class Settings:
             raise AttributeError(
                 f"Your {self.__class__.__name__!r} instance has no attribute named session_id_generator."
             )
-        return self._session_id_generator.__name__
+        return self._session_id_generator.__name__  # type: ignore
 
     @property
     def expire_time(self) -> timedelta:
@@ -142,8 +138,7 @@ def settings(
     session_id_generator: Optional[Callable[[], str]] = None,
     expire_time: Optional[timedelta] = timedelta(hours=6),
 ):
-
-    return Settings(redis_url, session_id_name, session_id_generator, expire_time)
+    return Settings(redis_url, session_id_name, session_id_generator, expire_time)  # type: ignore
 
 
 __all__ = ["settings"]

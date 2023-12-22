@@ -10,7 +10,7 @@ from fastapi import (
 )
 from typing import (
     Any,
-    Generator,
+    AsyncGenerator,
 )
 
 from aioredis_fastapi.config import (
@@ -21,7 +21,7 @@ from aioredis_fastapi.session import (
 )
 
 
-async def get_session_storage() -> Generator:
+async def get_session_storage() -> AsyncGenerator:
     storage = SessionStorage()
     await storage.init_client()
     yield storage
